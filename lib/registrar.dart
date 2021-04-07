@@ -9,24 +9,23 @@ class Registrar {
 
   void process() {
     var rest = given - price;
-    var registrarCopy = List<int>.from(registrar);
 
     if (given < price) return;
 
-    for (var i = 0; rest > 0 && i < registrarCopy.length; i++) {
-      if (rest >= registrarCopy[i]) {
-        rest -= registrarCopy[i];
-        payout.add(registrarCopy[i]);
-        registrarCopy.removeAt(i);
-        i -= 2;
+    for (var i = 0; rest > 0 && i < registrar.length; i++) {
+      if (rest >= registrar[i]) {
+        rest -= registrar[i];
+        payout.add(registrar[i]);
+        registrar.removeAt(i);
+        i--;
       }
     }
 
     if (rest != 0) {
+      registrar += payout;
       payout.clear();
       return;
     }
-    registrar = registrarCopy;
     price = 0;
     given = 0;
   }
